@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import Chat from "./chat/chat";
 import Home from "./home/home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

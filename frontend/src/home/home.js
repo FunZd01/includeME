@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./home.scss";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 function Homepage({ socket }) {
   const [username, setusername] = useState("");
@@ -8,29 +9,48 @@ function Homepage({ socket }) {
 
   const sendData = () => {
     if (username !== "" && roomname !== "") {
+      Swal.fire({
+        title: `Welcome ${username.toUpperCase()}`,
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2000
+      })
       socket.emit("joinRoom", { username, roomname });
     } else {
-      alert("username and roomname are must !");
+       Swal.fire({
+        title: 'Error...',
+        text: 'we can not you join, must complete all fields!',
+        icon: 'error',
+        timer: 1500
+       });
       window.location.reload();
     }
   };
 
   return (
     <div className="homepage">
-      <h1>Welcome to ChatApp</h1>
-      <input
-        placeholder="Input your user name"
-        value={username}
-        onChange={(e) => setusername(e.target.value)}
-      ></input>
-      <input
-        placeholder="Input the room name"
-        value={roomname}
-        onChange={(e) => setroomname(e.target.value)}
-      ></input>
-      <Link to={`/chat/${roomname}/${username}`}>
-        <button onClick={sendData}>Join</button>
-      </Link>
+      <h1>
+        includeme
+        <span>
+          <i className="fa fa-headset"></i>
+        </span>
+      </h1>
+        <input
+          placeholder="Input your user name"
+          value={username}
+          onChange={(e) => setusername(e.target.value)}
+        ></input>
+        <input
+          placeholder="Input the room name"
+          maxLength = "21"
+          value={roomname}
+          onChange={(e) => setroomname(e.target.value)}
+        ></input>
+        <Link to={`/chat/${roomname}/${username}`}>
+          <button onClick={sendData} >
+            Join
+          </button>
+        </Link>
     </div>
   );
 }
