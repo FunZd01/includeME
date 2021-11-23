@@ -6,7 +6,7 @@
 
 ## Busy technologies for development
 ```json
-tools = {
+{
   "fronted": "React + Redux + socketio",
   "backend": "nodejs + socketio",
 }
